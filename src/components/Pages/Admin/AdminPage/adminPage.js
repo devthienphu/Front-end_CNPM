@@ -1,13 +1,29 @@
 import { useNavigate } from "react-router-dom";
+import {useEffect} from 'react'
 import AdminHeader from "../../../Header/adminHeader";
-import { cate } from "../../../../data/data";
+// import { cate } from "../../../../data/data";
+import { getCate } from "../../../../api/dishApi";
 
+export let cate =[];
 export default function AdminPage() {
   const navigate=useNavigate();
+
+
+  useEffect(()=>{
+   
+    // call api
+    (async () => {
+      // const res = await updateCart(food,localStorage.getItem('user')); 
+      const res = await getCate();
+      cate=res;
+    })()
+  },[])
+
   let res=[] ;
   for(let i=0;i<cate.length-1;i++) {
     res.push(cate[i]) ;
   }
+
 
   return (
     
@@ -33,15 +49,15 @@ export default function AdminPage() {
             res.map((category,index)=>(
             
             <div key={index} className="md:basis-1/3 lg:basis-[22%] bg-white p-6 rounded-xl border border-gray-50 hover:bg-blue-100"
-            onClick={()=>{navigate(`cate/${category.cateID}`)}}>
+            onClick={()=>{navigate(`cate/${category._id}`)}}>
               <div className="flex justify-between items-start">
                 <div className="flex flex-col">
                     <p className="text-xs text-gray-600 tracking-wide">Category</p>
                     <h3 className="mt-1 text-lg text-blue-500 font-bold">{category.cateName}</h3>
                     <span className="mt-4 text-xs text-gray-500">Last Transaction 3 Hours ago</span>
                 </div>
-                <div className="bg-blue-500 p-2 md:p-1 xl:p-2 rounded-md">
-                    <img src="https://atom.dzulfarizan.com/assets/dish-2.png" alt="icon" className="w-auto h-8 md:h-6 xl:h-8 object-cover"/>
+                <div className="bg-gray-200 p-2 md:p-1 xl:p-2 rounded-md">
+                    <img src={category.image} alt="icon" className="w-auto h-8 md:h-6 xl:h-8 object-cover"/>
                 </div>
               </div>
             </div>

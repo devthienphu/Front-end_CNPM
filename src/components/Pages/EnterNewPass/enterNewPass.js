@@ -5,7 +5,7 @@ import { Store } from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css'
 import {login, userInfo} from '../../../api/userApi'
 
-export default function Login() {
+const EnterNewPass = () => {
     var result;
     var path= '';
     var notify ='warning';
@@ -16,7 +16,7 @@ export default function Login() {
     const navigate=useNavigate()
     const [state,setState] = useState(true)
     const [formValue, setformValue] = useState({
-        userName:'',
+        newPassWord:'',
         password:'', 
     });
 
@@ -80,26 +80,26 @@ export default function Login() {
         <div className="bg-grey-lighter min-h-screen flex flex-col bg-[url('https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg')]">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
                 <div className="bg-white px-6 py-8 rounded shadow-md text-black w-full">
-                    <h1 className="mb-8 text-3xl text-center font-semibold">Sign In</h1>
+                    <h1 className="mb-8 text-3xl text-center font-semibold">Enter New Password</h1>
                     <input 
                         type="text"
                         className="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="userName"
-                        placeholder="username"
+                        name="newPassWord"
+                        placeholder="New password"
                         onChange={handleChange} required/>
 
                     <input 
                         type="password"
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Confirm password"
                         onChange={handleChange} required />
             
                     <button
                         onClick={()=>{setState(!state);handleNotify(); navigate(path)}}
                         type="submit"
                         className="w-full text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark focus:outline-none my-1"
-                    >Sign In</button>
+                    >Confirm</button>
 
                     <div className="text-center text-sm text-grey-dark mt-4">
 
@@ -107,13 +107,6 @@ export default function Login() {
                             Back To Home
                         </a>
 
-                    </div>
-
-                    <div className="text-center text-sm text-grey-dark mt-4">
-  
-                        <a className="no-underline border-b border-grey-dark text-md text-grey-dark text-blue-700 font-semibold" href="#"  onClick={()=>{navigate('/ForgetPass')}}>
-                            Or Reset Password Here
-                        </a>
                     </div>
                 </div>
 
@@ -130,4 +123,5 @@ export default function Login() {
       </>
     )
 }
-  
+
+export default EnterNewPass;

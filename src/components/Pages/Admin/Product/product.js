@@ -1,10 +1,23 @@
 import { useNavigate } from 'react-router-dom';
-
+import {useEffect} from 'react'
 import AdminHeader from "../../../Header/adminHeader";
-import foodList from "../../../../data/data";
+// import foodList from "../../../../data/data";
+import getDish from '../../../../api/dishApi';
 
+export   let foodList =[];
 function AdProduct (){
     const navigate=useNavigate();
+
+    useEffect(()=>{
+   
+        // call api
+        (async () => {
+          // const res = await updateCart(food,localStorage.getItem('user')); 
+          const res = await getDish();
+          foodList=res;
+        })()
+      },[])
+
     return (
        <>
            <div className="min-h-screen md:flex md:flex-row bg-gray-100 ">
@@ -20,14 +33,14 @@ function AdProduct (){
                     foodList.map((food,index)=>(
 
                     <div key={index} className="md:basis-1/3 lg:basis-[22%] bg-white p-6 rounded-xl border border-gray-50 hover:bg-blue-100"
-                    onClick={()=>{navigate(`${food.id}`)}}>
+                    onClick={()=>{navigate(`${food._id}`)}}>
                     <div className="flex justify-between items-start">
                         <div className="flex flex-col">
                             <p className="text-xs text-gray-600 tracking-wide">{food.category}</p>
                             <h3 className="mt-1 text-lg text-blue-500 font-bold">{food.name}</h3>
                             <span className="mt-4 text-xs text-gray-500">Last Transaction 3 Hours ago</span>
                         </div>
-                        <div className="p-2 md:p-1 xl:p-2 rounded-md">
+                        <div className="bg-gray-200 p-2 md:p-1 xl:p-2 rounded-md">
                             <img src={food.image} alt="icon" className="w-auto h-8 md:h-6 xl:h-8 object-cover"/>
                         </div>
                     </div>
@@ -36,7 +49,7 @@ function AdProduct (){
                     ))
                     
                 }
-                <div className="md:basis-1/3 lg:basis-[22%] bg-white p-6 rounded-xl border border-gray-50 hover:bg-blue-100"
+                <div className="md:basis-1/3 lg:basis-[22%] bg-white p-6 rounded-xl border border-gray-50 hover:bg-blue-100 mb-4"
                     onClick={()=>{navigate('add')}}>
                    
                     <div className="flex justify-between items-start">

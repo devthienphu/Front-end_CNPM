@@ -60,7 +60,7 @@ export default function About() {
       <>
       <Header/>
 
-      <p className="pt-4 text-center text-2xl font-semibold pt-32">About Us</p>
+      <p className="pt-4 text-center text-2xl font-semibold pt-40"> About Us</p>
       <p className="pt-1 text-center text-3xl font-semibold uppercase text-green-600 pb-8 hover:text-blue-600 
       transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 hover:rotate-3 hover:skew-x-3">
        why you choice our restaurant?</p>
@@ -73,7 +73,7 @@ export default function About() {
         </div>
       
         <div className="basis-1/3">  
-          <h2 className="font-semibold md:text-3xl sm:text-xl text-center">We serve the best delicious and quality foods.</h2>
+          <h2 className="font-semibold md:text-2xl sm:text-xl text-center">We serve the best delicious and quality foods.</h2>
 
           <h2 className="text-md pt-4 px-4 sm:px-0">Our restaurant's dishes use ingredients fresh, clean, and carefully selected before processing.</h2>
           <br/>

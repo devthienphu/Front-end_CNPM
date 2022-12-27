@@ -2,51 +2,25 @@ import { useContext, useState } from "react";
 import Footer from "../../Footer";
 import Header from "../../Header";
 import { AddContext } from "../../../App";
+import { updateCart } from "../../../api/cartApi";
 
-
-const listCart =[
-    {
-        name:'Salamon salad',
-        price:49,
-        image:'https://pngimg.com/uploads/sushi/sushi_PNG9202.png'
-    },
-    {
-        name:'Salamon salad',
-        price:49,
-        image:'https://pngimg.com/uploads/sushi/sushi_PNG9202.png'
-    },
-    {
-        name:'Salamon salad',
-        price:49,
-        image:'https://pngimg.com/uploads/sushi/sushi_PNG9202.png'
-    },
-    {
-        name:'Salamon salad',
-        price:49,
-        image:'https://pngimg.com/uploads/sushi/sushi_PNG9202.png'
-    },
-]
 
 
 export default function Cart({onRemove}) {
 
     const cartItems= useContext(AddContext);
 
-    // console.log(cartItems);
-    // console.log(listCart);
-    
-    
     const[ count,setCount]= useState(false);
 
     var totalPrice =0;
     for(var i =0;i<cartItems.length;i++) {
-      totalPrice += cartItems[i].price*cartItems[i].qty;
+      totalPrice += cartItems[i].price*cartItems[i].quantity;
     }
 
   return (
     <>
     <Header/>
-    <p className="text-xl font-bold pt-32 ml-32 pb-8">Shopping Cart</p>
+    <p className="text-xl font-bold pt-8 ml-32 pb-8 pt-32">Shopping Cart</p>
 
     <div className="flex flex-col flex-wrap lg:flex-row items-center justify-center space-y-8">
         {/* cart items */}
@@ -65,18 +39,22 @@ export default function Cart({onRemove}) {
                     <div className="flex ">
 
                     <button className="mt-12 mb-12 bg-white rounded-xl m-auto bg-green-300" 
-                    onClick={()=>{setCount(!count); cart.qty=cart.qty+1;} }>
+                    onClick={()=>{setCount(!count); 
+                    cart.quantity=cart.quantity+1;  
+                    updateCart(cartItems,localStorage.getItem('user'))} 
+                    }>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                     </button>
                     
-                    <div className=" m-auto rounded-2xl px-2" >{cart.qty}</div>
+                    <div className=" m-auto rounded-2xl px-2" >{cart.quantity}</div>
 
                     <button className=" mt-12 mb-12 bg-white rounded-xl m-auto bg-green-300" 
-                    onClick={()=>{setCount(!count); cart.qty=cart.qty-1;
-                        if(cart.qty<1)
-                          cart.qty=1; 
+                    onClick={()=>{setCount(!count); cart.quantity=cart.quantity-1;
+                        if(cart.quantity<1)
+                          cart.quantity=1; 
+                          updateCart(cartItems,localStorage.getItem('user'))
                           }
                         }>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -84,9 +62,9 @@ export default function Cart({onRemove}) {
                         </svg>
                     </button>
 
-                    <p className="m-auto ml-8 text-2xl font-semibold">${+cart.price *(+cart.qty)}</p>
+                    <p className="m-auto ml-8 text-2xl font-semibold">${+cart.price *(+cart.quantity)}</p>
 
-                    <button className="bg-red-300 rounded-2xl m-auto ml-12 mr-4" onClick={()=>{setCount(!count); onRemove(cart); }}>
+                    <button className="bg-red-300 rounded-2xl m-auto ml-12 mr-4" onClick={()=>{ onRemove(cart); updateCart(cartItems,localStorage.getItem('user')); setCount(!count);}}>
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
@@ -108,7 +86,7 @@ export default function Cart({onRemove}) {
               <p className="mx-8 mt-4">Payment Method</p>
 
               <div className="mx-4 mt-4 items-center flex">
-                <div className="flex items-center mb-4 border border-green-500 border-2 bg-white rounded-xl mx-8 mt-4 items-center flex">
+                <div className="flex items-center mb-4 border border-green-500 border-2 bg-white rounded-xl mx-8 mt-4 items-center flex w-40">
                   <input id="payment-option-1" type="radio" name="payments" value="USA" 
                   className=" ml-4 w-6 h-6 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 
                   dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600" defaultChecked/>
@@ -118,7 +96,7 @@ export default function Cart({onRemove}) {
                   </label>
                 </div>
 
-                <div className="flex items-center mb-4 border border-green-500 border-2 bg-white rounded-xl mx-8 mt-4 items-center flex">
+                <div className="flex items-center mb-4 border border-green-500 border-2 bg-white rounded-xl mx-8 mt-4 items-center flex w-40">
                   <input id="payment-option-2" type="radio" name="payments" value="USA" 
                   className=" ml-4 w-6 h-6 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 
                   dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"/>
@@ -160,6 +138,7 @@ export default function Cart({onRemove}) {
         </div>
 
      </div>
+    
     
     
     <Footer/>

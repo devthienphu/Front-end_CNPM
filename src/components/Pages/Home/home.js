@@ -5,25 +5,24 @@ import Footer from "../../Footer/";
 import Header from "../../Header";
 import dish from "../../../images/dishfood.png";
 import chef from "../../../images/chef.png";
-import foodList from '../../../data/data';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import getDish from "../../../api/dishApi";
 
+//
 
-
-export default function Home() {
-     const [state, setstate] = useState('popular');
+export default function Home({foodList}) {
+    const [state, setstate] = useState('popular');
     return (
       <>
 
     <Header/>
-    
      <Slider></Slider>
      <Category></Category>
      <Card foodList={foodList} state={state} ></Card>
 
      {/*advertisement */}
 
-     <div className="flex flex-col md:flex-row justify-center items-center pt-10 space-x-4 space-y-4 pb-4">
+      <div className="flex flex-col md:flex-row justify-center items-center pt-10 space-x-4 space-y-4 pb-4">
         <div className="basis-1/2 flex flex-col flex-wrap pl-16">
             <p className="mx-auto text-5xl font-bold leading-normal ">Cooked by the <br/>Best Chefs in the<br/> World</p>
             <p className="text-gray-500 text-lg mx-auto my-4 lg:pl-14">we present the best chef to cook your food to make<br/> the food state extraordinary</p>
@@ -85,9 +84,9 @@ export default function Home() {
                   
                   <div>
                     <p className="text-gray-600">How much welght could you lose for good?
-                        Members eat freely five days ơ week no rules or food
-                        lIogging. How much welight could you lose for good?
-                        Members eadt freely fiíve days ơ week no rules or food
+                        Members eat freely five days a week no rules or food
+                        l ogging. How much welight could you lose for good?
+                        Members eadt freely fiíve days a week no rules or food
                         logging five days a week.</p>
 
                     <div className="flex items-center mt-3 mb-2.5">
