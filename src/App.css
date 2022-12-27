@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .App {
   text-align: center;
 }
@@ -26,6 +30,11 @@
 
 .App-link {
   color: #61dafb;
+}
+
+
+.clip{
+  clip-path: ellipse(16% 36% at 98% 53%);
 }
 
 @keyframes App-logo-spin {
