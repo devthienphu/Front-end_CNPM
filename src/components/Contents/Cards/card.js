@@ -4,7 +4,6 @@ import AddButton from "../Buttons/addButton";
 import CheckButton from "../Buttons/checkButton";
 import {AddContext} from "../../../App"
 
-
 export default function Card({foodList,state,setState}) {
     const navigate=useNavigate();
     const cartItems= useContext(AddContext);
@@ -16,11 +15,10 @@ export default function Card({foodList,state,setState}) {
     if(state ==='popular'){
         foodCate = foodList.filter(e => e.isBestSeller === true);
     }
-
-    function checkInCart(foodId){
-        if(typeof cartItems ==='undefined')
+    function checkInCart(foodName){
+        if(cartItems ===undefined)
             return false;
-        if(cartItems.find(e => e.id === foodId)){
+        if(cartItems.find(e => e.name === foodName)){
 
             return true;
         }
@@ -35,14 +33,14 @@ export default function Card({foodList,state,setState}) {
 
         <div className="flex basis-1/8 hidden md:flex">
 
-            <div className="cursor-pointer mr-44 whitespace-nowrap w-36 inline-flex items-center justify-center px-2 py-1
+            <a className="cursor-pointer mr-44 whitespace-nowrap w-36 inline-flex items-center justify-center px-2 py-1
                         border border-transparent rounded-3xl shadow-sm text-base font-medium text-white bg-green-500 hover:bg-green-600
-                        transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 cursor-pointer"
-                        onClick={()=>{ navigate('/Menu'); setState('all'); setPre(!pre);}}>
+                        transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110"
+                        onClick={()=>{ navigate('/Menu'); setState('all'); setPre(!pre);}} href="#">
             View all
                 
                 
-            </div>
+            </a>
 
         </div>
         </div>
@@ -58,7 +56,7 @@ export default function Card({foodList,state,setState}) {
                         onClick={()=>{
                             // food.isCheck = !food.isCheck;
                             // setState(!state)
-                            navigate(`/Product/${food.id}`)
+                            navigate(`/Product/${food._id}`)
                         }}
                         >
 
@@ -80,7 +78,7 @@ export default function Card({foodList,state,setState}) {
                         
                         <div className="flex justify-between items-center">
                             <span className='text-3xl font-bold text-gray-900'>${food.price}</span>
-                            {checkInCart(food.id) && <AddButton></AddButton> ?<CheckButton></CheckButton>:<AddButton></AddButton>}
+                            {checkInCart(food.name) && <AddButton></AddButton> ?<CheckButton></CheckButton>:<AddButton></AddButton>}
                             
                         </div>
                         </div>
