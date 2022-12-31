@@ -22,10 +22,10 @@ const teamate = [
 
   },
   {
-    name:'Lý Chánh Tín',
+    name:'Làu Lâm Tường',
     position: 'Co-founder / Cashier',
-    image:'https://i.ibb.co/dQ88qBd/tin.png',
-    facebook:'https://www.facebook.com/tin.lychanh'
+    image:'https://scontent.fsgn13-2.fna.fbcdn.net/v/t39.30808-6/311917656_2137019219833329_7638157290069035194_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=5vTbSfJdCWEAX8qHyGc&_nc_ht=scontent.fsgn13-2.fna&oh=00_AfBHPB2W0K2lmgye-1LgrcZBU7MVEB6lhscNa94jF_TCeA&oe=63B5D2B5',
+    facebook:'https://www.facebook.com/t'
   },
   {
     name:'Nguyễn Huy Hoàng',
